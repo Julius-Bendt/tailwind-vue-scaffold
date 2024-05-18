@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { type AxiosInstance, type AxiosResponse } from "axios";
 
 interface ErrorResponse {
     message: string;
@@ -19,8 +19,14 @@ const http: AxiosInstance = axios.create({
 });
 
 http.interceptors.response.use(
-    (response: { data: any; }) => {
-        return { data: response.data, ok: true };
+    (response: AxiosResponse): AxiosResponse => {
+        return {
+            ...response,
+            data: {
+                data: response.data,
+                ok: true,
+            }
+        };
     },
     (errorResponse: { toJSON: () => ErrorResponse; }) => {
         const error: ErrorResponse = errorResponse.toJSON();
