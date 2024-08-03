@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: var(--background);
+}
+
 @font-face {
   font-family: Inter;
   src: url(Inter.ttf);
@@ -26,6 +30,6 @@
 }
 
 .v-toast__item--info {
-  background-color: #6366f1 !important;
-  color: #f3f4f6 !important;
+  background-color: var(--primary) !important;
+  color: var(--text-color) !important;
 }

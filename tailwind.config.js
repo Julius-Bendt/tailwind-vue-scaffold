@@ -14,5 +14,15 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ':root': {
+          '--background': theme('colors.background'),
+          '--primary': theme('colors.primary'),
+          '--text-color': theme('colors.text')
+        }
+      })
+    }
+  ]
 }

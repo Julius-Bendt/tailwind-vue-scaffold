@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import FooterNav from '@/components/common/FooterNav.vue'
+import SideBar from '@/components/common/SideBar.vue'
+
+const route = useRoute()
 </script>
 
 <template>
   <div class="min-h-screen w-screen overflow-x-hidden bg-background text-text font-inter">
-    <RouterView v-slot="{ Component }">
-      <Transition name="slide" class="p-8">
-        <component :is="Component" />
-      </Transition>
+    <SideBar />
+    <RouterView v-slot="{ Component }" :key="route.fullPath">
+      <div class="sm:ml-64 p-4 min-h-screen bg-background text-text">
+        <Transition name="slide">
+          <component :is="Component" />
+        </Transition>
+      </div>
     </RouterView>
+    <FooterNav class="p-4 sm:ml-64" />
   </div>
 </template>
 

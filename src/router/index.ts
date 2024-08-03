@@ -20,16 +20,32 @@ const router = createRouter({
       },
       component: () => import('../views/HomeView.vue')
     },
+    {
+      path: '/site/:siteId',
+      name: 'site',
+      meta: {
+        title: "Site",
+      },
+      component: () => import('../views/HomeView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'pageNotFound',
+      meta: {
+        title: "404",
+      },
+      component: () => import('../views/PageNotFound.vue')
+    },
   ]
 })
 
-const DEFAULT_TITLE = 'DEFAULT TITLE';
-router.afterEach((to, from) => {
-  let title = DEFAULT_TITLE;
 
-  if (to.meta.title != undefined) {
-    title = "PAGE | " + to.meta.title;
-  }
+
+
+const defaultTitle = import.meta.env.VITE_SITE_NAME;
+router.afterEach((to, from) => {
+  const title = to.meta.title != undefined ? `${defaultTitle} | ${to.meta.title}` : defaultTitle;
+
   document.title = title;
 });
 
